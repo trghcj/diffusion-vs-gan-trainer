@@ -206,10 +206,11 @@ class WGANGPTrainer:
                     metrics={"loss_d": avg_d, "loss_g": avg_g},
                 )
 
-                self.sample_and_save_grid(
-                    num_samples=self.config.training.num_sample_images,
-                    filename=f"gan_sample_epoch_{epoch:03d}.png",
-                )
+                if epoch == self.config.training.epochs:
+                    self.sample_and_save_grid(
+                        num_samples=self.config.training.num_sample_images,
+                        filename=f"gan_sample_epoch_{epoch:03d}.png",
+                    )
 
         return history
 

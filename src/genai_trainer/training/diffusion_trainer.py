@@ -141,12 +141,13 @@ class DiffusionTrainer:
                         metrics={"loss": avg_loss},
                     )
 
-                # Generate sample preview
-                self.sample_and_save_grid(
-                    num_samples=self.config.training.num_sample_images,
-                    filename=f"sample_epoch_{epoch:03d}.png",
-                    use_ddim=True,
-                )
+                # Generate sample preview on final epoch
+                if epoch == self.config.training.epochs:
+                    self.sample_and_save_grid(
+                        num_samples=self.config.training.num_sample_images,
+                        filename=f"sample_epoch_{epoch:03d}.png",
+                        use_ddim=True,
+                    )
 
         return history
 

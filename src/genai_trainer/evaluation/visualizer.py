@@ -21,7 +21,7 @@ def create_comparison_grid(
       Row 2: Diffusion Model Samples (DDPM/DDIM)
       Row 3: WGAN-GP Baseline Samples
 
-    Uses academic styling (neutral margins, clear labels, zero blur/neon effects).
+    Uses academic styling (horizontal labels, neutral margins, zero blur/neon effects).
     """
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -41,9 +41,10 @@ def create_comparison_grid(
     fig, axes = plt.subplots(
         nrows=3,
         ncols=n,
-        figsize=(n * 1.6, 5.0),
-        gridspec_kw={"wspace": 0.05, "hspace": 0.15},
+        figsize=(n * 1.5 + 2.5, 5.5),
+        gridspec_kw={"wspace": 0.08, "hspace": 0.30},
     )
+    plt.subplots_adjust(left=0.22, right=0.98, top=0.88, bottom=0.08)
 
     for row_idx, (label, batch) in enumerate(rows):
         c = batch.shape[1]
@@ -59,16 +60,32 @@ def create_comparison_grid(
             ax.set_xticks([])
             ax.set_yticks([])
 
-            # Subtle solid border
+            # Clean solid border
             for spine in ax.spines.values():
-                spine.set_color("#444444")
-                spine.set_linewidth(0.8)
+                spine.set_color("#333333")
+                spine.set_linewidth(1.0)
 
+            # Horizontal label to the left of the row, perfectly aligned
             if col_idx == 0:
-                ax.set_ylabel(label, fontsize=10, fontweight="bold", labelpad=8)
+                ax.text(
+                    -0.25,
+                    0.5,
+                    label,
+                    transform=ax.transAxes,
+                    fontsize=11,
+                    fontweight="bold",
+                    va="center",
+                    ha="right",
+                    color="#222222",
+                )
 
-    plt.suptitle("Qualitative Comparison: Real vs Diffusion vs WGAN-GP", fontsize=12, y=0.98)
-    plt.savefig(path, dpi=150, bbox_inches="tight", facecolor="white")
+    plt.suptitle(
+        "Qualitative Comparison: Real vs Diffusion vs WGAN-GP",
+        fontsize=13,
+        fontweight="bold",
+        y=0.96,
+    )
+    plt.savefig(path, dpi=160, bbox_inches="tight", facecolor="white")
     plt.close(fig)
 
     return path
