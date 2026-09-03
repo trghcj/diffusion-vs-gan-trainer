@@ -42,7 +42,7 @@ htmlcov/
 .ruff_cache/
 
 # Local Data & Heavy Checkpoints
-data/
+/data/
 outputs/checkpoints/*.pt
 outputs/samples/*.png
 outputs/reports/*.json
