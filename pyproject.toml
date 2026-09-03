@@ -38,10 +38,14 @@ genai-trainer = "genai_trainer.cli:main"
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B"]
 ignore = ["B008", "E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["genai_trainer"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
