@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "diffusion-vs-gan-trainer"
+version = "0.1.0"
+description = "Diffusion-vs-GAN Trainer with CI: Tiny Diffusion Training + FID/KID Evaluation and WGAN-GP Baseline"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "ML Engineering Team" }
+]
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "pydantic>=2.5.0",
+    "pyyaml>=6.0",
+    "pillow>=9.5.0",
+    "matplotlib>=3.7.0",
+    "tqdm>=4.65.0",
+    "rich>=13.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.4.0",
+    "mypy>=1.6.0"
+]
+
+[project.scripts]
+genai-trainer = "genai_trainer.cli:main"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = ["B008", "E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --strict-markers"
+
+[tool.coverage.run]
+source = ["src/genai_trainer"]
+omit = ["tests/*"]

@@ -1,0 +1,20 @@
+dataset:
+  name: "fashion_mnist"
+  image_size: 32
+  channels: 1
+  data_dir: "data"
+
+evaluation:
+  num_eval_samples: 100
+  batch_size: 32
+  device: "auto"
+  seed: 42
+  feature_extractor: "efficient_cnn" # Options: efficient_cnn (fast CPU/CI), inception_v3 (standard)
+  metrics:
+    - "fid"
+    - "kid"
+  diffusion_checkpoint: "outputs/checkpoints/diffusion/best_model.pt"
+  gan_checkpoint: "outputs/checkpoints/gan/best_model.pt"
+  output_report_json: "outputs/reports/metrics_summary.json"
+  output_report_md: "outputs/reports/comparison_report.md"
+  output_grid_png: "outputs/reports/comparison_grid.png"

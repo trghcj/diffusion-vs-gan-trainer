@@ -1,0 +1,31 @@
+dataset:
+  name: "fashion_mnist" # Options: fashion_mnist, cifar10, synthetic
+  image_size: 32
+  channels: 1
+  batch_size: 64
+  num_workers: 0
+  download: true
+  data_dir: "data"
+
+model:
+  latent_dim: 128
+  channels: 1
+  generator_features: 32
+  discriminator_features: 32
+
+wgan_gp:
+  lambda_gp: 10.0
+  n_critic: 5
+
+training:
+  epochs: 5
+  lr_g: 0.0002
+  lr_d: 0.0002
+  beta1: 0.0
+  beta2: 0.9
+  device: "auto"
+  seed: 42
+  checkpoint_interval: 1
+  checkpoint_dir: "outputs/checkpoints/gan"
+  samples_dir: "outputs/samples/gan"
+  num_sample_images: 16

@@ -1,0 +1,35 @@
+dataset:
+  name: "fashion_mnist" # Options: fashion_mnist, cifar10, synthetic
+  image_size: 32
+  channels: 1
+  batch_size: 64
+  num_workers: 0
+  download: true
+  data_dir: "data"
+
+model:
+  in_channels: 1
+  out_channels: 1
+  base_channels: 32
+  channel_mults: [1, 2, 4]
+  num_res_blocks: 2
+  time_emb_dim: 128
+  dropout: 0.1
+
+diffusion:
+  timesteps: 1000
+  schedule: "linear" # Options: linear, cosine
+  beta_start: 0.0001
+  beta_end: 0.02
+  sample_timesteps: 50 # DDIM accelerated steps
+
+training:
+  epochs: 5
+  lr: 0.0002
+  grad_clip_norm: 1.0
+  device: "auto" # "cuda", "cpu", or "auto"
+  seed: 42
+  checkpoint_interval: 1
+  checkpoint_dir: "outputs/checkpoints/diffusion"
+  samples_dir: "outputs/samples/diffusion"
+  num_sample_images: 16
